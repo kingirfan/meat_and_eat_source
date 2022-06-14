@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "569829994340",
+    "project_id": "meat-and-eat-22c35",
+    "storage_bucket": "meat-and-eat-22c35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569829994340:android:e7a9762691b23532611471",
+        "android_client_info": {
+          "package_name": "com.example.meat_and_eat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569829994340-06koea9ljgfl0kqf4ot66832ni8ucvq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzpknvLlTPJ8kLw4MnDeWgK7d34F19wBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "569829994340-06koea9ljgfl0kqf4ot66832ni8ucvq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
