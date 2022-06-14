@@ -101,14 +101,13 @@ class AuthControllers extends GetxController {
   }
 
   googleSignIn() async {
-    isLoading = true;
+     //isLoading = true;
     try {
       final GoogleSignInAccount? googleUser =
           await googleSigninAccount.signIn();
       googleSigninAccount.signOut();
       displayName = googleUser!.displayName!;
       displayPhoto = googleUser.photoUrl!;
-      isLoading = false;
       update();
       Get.offNamed(Routes.mainScreen);
     } catch (e) {
