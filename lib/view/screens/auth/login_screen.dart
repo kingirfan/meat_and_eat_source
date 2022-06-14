@@ -185,19 +185,14 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GetBuilder<AuthControllers>(builder: (controller) {
-                          if (!controller.isLoading) {
-                            return InkWell(
-                              onTap: () {
-                                controller.googleSignIn();
-                              },
-                              child: Image.asset(
-                                'assets/images/google.png',
-                              ),
-                            );
-                          }
-                          else {
-                            return const CircularProgressIndicator();
-                          }
+                          return InkWell(
+                            onTap: () {
+                              controller.googleSignIn();
+                            },
+                            child: Image.asset(
+                              'assets/images/google.png',
+                            ),
+                          );
                         },),
                         const SizedBox(
                           width: 20,
