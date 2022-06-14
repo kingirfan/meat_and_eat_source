@@ -162,9 +162,7 @@ class LoginScreen extends StatelessWidget {
                           );
                         }
                         else {
-                          return const CircularProgressIndicator(
-
-                          );
+                          return const CircularProgressIndicator();
                         }
                       },
                     ),
@@ -200,14 +198,14 @@ class LoginScreen extends StatelessWidget {
                           }
                         },),
                         const SizedBox(
-                          width: 20,
+                          width: 0,
                         ),
-                        InkWell(
+                        /*InkWell(
                           onTap: () {},
                           child: Image.asset(
                             'assets/images/facebook.png',
                           ),
-                        )
+                        )*/
                       ],
                     )
                   ],
