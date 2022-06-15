@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:meat_and_eat/logic/bindings/auth_bindings.dart';
+import 'package:meat_and_eat/logic/bindings/main_bindings.dart';
 import 'package:meat_and_eat/view/screens/auth/forgot_password_screen.dart';
 import 'package:meat_and_eat/view/screens/auth/login_screen.dart';
 import 'package:meat_and_eat/view/screens/auth/signup_screen.dart';
@@ -32,9 +33,13 @@ class AppRoutes {
         page: () => ForgotPasswordScreen(),
         binding: AuthBindings()),
     GetPage(
-        name: Routes.mainScreen,
-        page: () => MainScreen(),
-        binding: AuthBindings()),
+      name: Routes.mainScreen,
+      page: () => MainScreen(),
+      bindings: [
+        AuthBindings(),
+        MainBindings()
+      ],
+    ),
   ];
 }
 

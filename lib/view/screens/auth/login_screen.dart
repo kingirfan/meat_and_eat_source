@@ -24,8 +24,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white,
+        backgroundColor: mainColor,
         elevation: 0,
       ),
       body: SingleChildScrollView(
