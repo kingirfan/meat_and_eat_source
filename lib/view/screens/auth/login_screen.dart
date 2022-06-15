@@ -12,8 +12,8 @@ import 'package:meat_and_eat/view/widgets/text_utils.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: 'king@gmail.com');
+  final passwordController = TextEditingController(text: 'password');
 
   final formKey = GlobalKey<FormState>();
 

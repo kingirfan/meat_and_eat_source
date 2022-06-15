@@ -10,6 +10,7 @@ import 'package:meat_and_eat/view/screens/welcome_screen.dart';
 
 class AppRoutes {
   static const welcome = Routes.welcomeScreen;
+  static const mainScreen = Routes.mainScreen;
 
   static final routes = [
     GetPage(

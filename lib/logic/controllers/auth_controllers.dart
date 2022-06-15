@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meat_and_eat/routes/routes.dart';
 
@@ -13,6 +14,8 @@ class AuthControllers extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   var googleSigninAccount = GoogleSignIn();
   bool isLoading = false;
+  bool isSignedIn = false;
+  final GetStorage authBox = GetStorage();
 
   checkVisibility() {
     isVisibility = !isVisibility;
@@ -64,11 +67,15 @@ class AuthControllers extends GetxController {
 
   logInUsingFirebase({required String email, required String password}) async {
     isLoading = true;
+
     try {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
         displayName = auth.currentUser!.displayName!;
+        isSignedIn = true;
+        authBox.write('auth', isSignedIn);
+
       });
       update();
       Get.offNamed(Routes.mainScreen);
@@ -101,13 +108,16 @@ class AuthControllers extends GetxController {
   }
 
   googleSignIn() async {
-     //isLoading = true;
+    //isLoading = true;
     try {
       final GoogleSignInAccount? googleUser =
           await googleSigninAccount.signIn();
       googleSigninAccount.signOut();
       displayName = googleUser!.displayName!;
       displayPhoto = googleUser.photoUrl!;
+      isSignedIn = true;
+      authBox.write('auth', isSignedIn);
+
       update();
       Get.offNamed(Routes.mainScreen);
     } catch (e) {
@@ -156,5 +166,15 @@ class AuthControllers extends GetxController {
     }
   }
 
-  signOutFromApp() {}
+  signOutFromApp() async {
+    try {
+      await auth.signOut();
+      await googleSigninAccount.signOut();
+      displayName = '';
+      isSignedIn = false;
+      authBox.remove('auth');
+      update();
+      Get.offNamed(Routes.welcomeScreen);
+    } catch (error) {}
+  }
 }
