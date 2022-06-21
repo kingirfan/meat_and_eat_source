@@ -30,9 +30,11 @@ class CartItems extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return buildCardItems(
-                  image: controller.productList[index].image,
-                  price: controller.productList[index].price,
-                  rate: controller.productList[index].rating.rate);
+                image: controller.productList[index].image,
+                price: controller.productList[index].price,
+                rate: controller.productList[index].rating.rate,
+                productId: controller.productList[index].id
+              );
             },
           ),
         );
@@ -40,11 +42,11 @@ class CartItems extends StatelessWidget {
     });
   }
 
-  Widget buildCardItems({
-    required String image,
-    required double price,
-    required double? rate,
-  }) {
+  Widget buildCardItems(
+      {required String image,
+      required double price,
+      required double? rate,
+      required int productId}) {
     return Padding(
       padding: const EdgeInsets.all(
         5,
@@ -61,25 +63,31 @@ class CartItems extends StatelessWidget {
             ]),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite_outline,
-                    color: Colors.black,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
+            Obx(() => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        controller.manageFavourites(productId);
+                      },
+                      icon: controller.isFavourites(productId) ? const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      ) :
+                      const Icon(
+                        Icons.favorite_border_outlined,
+                        color: Colors.black,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                )),
             Container(
               width: double.infinity,
               height: 140,
@@ -95,7 +103,7 @@ class CartItems extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   Text(
+                  Text(
                     '\$ $price',
                     style: const TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
