@@ -6,6 +6,8 @@ import 'package:meat_and_eat/logic/bindings/product_bindings.dart';
 import 'package:meat_and_eat/view/screens/auth/forgot_password_screen.dart';
 import 'package:meat_and_eat/view/screens/auth/login_screen.dart';
 import 'package:meat_and_eat/view/screens/auth/signup_screen.dart';
+import 'package:meat_and_eat/view/screens/cart_screen.dart';
+import 'package:meat_and_eat/view/screens/category_screen.dart';
 import 'package:meat_and_eat/view/screens/main_screen.dart';
 import 'package:meat_and_eat/view/screens/welcome_screen.dart';
 
@@ -37,9 +39,13 @@ class AppRoutes {
     GetPage(
       name: Routes.mainScreen,
       page: () => MainScreen(),
+      bindings: [AuthBindings(), MainBindings(), ProductBinding()],
+    ),
+    GetPage(
+      name: Routes.cartScreen,
+      page: () => CartScreen(),
       bindings: [
         AuthBindings(),
-        MainBindings(),
         ProductBinding()
       ],
     ),
@@ -52,4 +58,5 @@ class Routes {
   static const signUpScreen = '/signUpScreen';
   static const forgotPasswordScreen = '/forgotPasswordScreen';
   static const mainScreen = '/mainScreen';
+  static const cartScreen = '/cartScreen';
 }

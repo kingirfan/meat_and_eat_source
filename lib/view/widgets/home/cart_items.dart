@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meat_and_eat/logic/controllers/cart_controller.dart';
 import 'package:meat_and_eat/logic/controllers/products_controller.dart';
+import 'package:meat_and_eat/model/product_models.dart';
 import 'package:meat_and_eat/utils/theme.dart';
 import 'package:meat_and_eat/view/widgets/text_utils.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,7 @@ class CartItems extends StatelessWidget {
   CartItems({Key? key}) : super(key: key);
 
   final controller = Get.find<ProductController>();
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +33,11 @@ class CartItems extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return buildCardItems(
-                image: controller.productList[index].image,
-                price: controller.productList[index].price,
-                rate: controller.productList[index].rating.rate,
-                productId: controller.productList[index].id
+                  image: controller.productList[index].image,
+                  price: controller.productList[index].price,
+                  rate: controller.productList[index].rating.rate,
+                  productId: controller.productList[index].id,
+                productModels: controller.productList[index]
               );
             },
           ),
@@ -42,11 +46,13 @@ class CartItems extends StatelessWidget {
     });
   }
 
-  Widget buildCardItems(
-      {required String image,
-      required double price,
-      required double? rate,
-      required int productId}) {
+  Widget buildCardItems({
+    required String image,
+    required double price,
+    required double? rate,
+    required int productId,
+    required ProductModels productModels
+  }) {
     return Padding(
       padding: const EdgeInsets.all(
         5,
@@ -70,19 +76,22 @@ class CartItems extends StatelessWidget {
                       onPressed: () {
                         controller.manageFavourites(productId);
                       },
-                      icon: controller.isFavourites(productId) ? const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      ) :
-                      const Icon(
-                        Icons.favorite_border_outlined,
-                        color: Colors.black,
-                      ),
+                      icon: controller.isFavourites(productId)
+                          ? const Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            )
+                          : const Icon(
+                              Icons.favorite_border_outlined,
+                              color: Colors.black,
+                            ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cartController.addProductToCart(productModels);
+                      },
                       icon: const Icon(
-                        Icons.add,
+                        Icons.shopping_cart,
                         color: Colors.black,
                       ),
                     ),
