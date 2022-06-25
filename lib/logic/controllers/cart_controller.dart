@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,12 +10,15 @@ import '../../utils/theme.dart';
 class CartController extends GetxController {
   var productsMap = {}.obs;
 
-  addProductToCart(ProductModels productModels) {
+  var storage = GetStorage();
+
+  addProductToCart(ProductModels productModels) async {
     if (productsMap.containsKey(productModels)) {
       productsMap[productModels] += 1;
     } else {
       productsMap[productModels] = 1;
     }
+
   }
 
   removeProductFromCart(ProductModels productModels) {
@@ -56,18 +61,16 @@ class CartController extends GetxController {
   get productSubTotal =>
       productsMap.entries.map((e) => e.key.price * e.value).toList();
 
-  get total =>
-      productsMap.entries
-          .map((e) => e.key.price * e.value)
-          .toList()
-          .reduce((value, element) => value + element)
-          .toStringAsFixed(2);
+  get total => productsMap.entries
+      .map((e) => e.key.price * e.value)
+      .toList()
+      .reduce((value, element) => value + element)
+      .toStringAsFixed(2);
 
   int quantity() {
     if (productsMap.isEmpty) {
       return 0;
-    }
-    else {
+    } else {
       return productsMap.entries
           .map((e) => e.value)
           .toList()
