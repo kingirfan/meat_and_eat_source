@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    const SearchFormText()
+                    SearchFormText()
                   ],
                 ),
               ),

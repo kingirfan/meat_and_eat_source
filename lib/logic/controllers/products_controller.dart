@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:meat_and_eat/model/product_models.dart';
@@ -8,6 +9,9 @@ class ProductController extends GetxController {
   var isLoading = true.obs;
   var favouriteList = <ProductModels>[].obs;
   var storage = GetStorage();
+  var searchList = <ProductModels>[].obs;
+  TextEditingController searchController = TextEditingController();
+
 
   @override
   void onInit() {
@@ -15,7 +19,10 @@ class ProductController extends GetxController {
     List? storedFavourites = storage.read<List>("isFavList");
     if (storedFavourites != null) {
       favouriteList =
-          storedFavourites.map((e) => ProductModels.fromJson(e)).toList().obs;
+          storedFavourites
+              .map((e) => ProductModels.fromJson(e))
+              .toList()
+              .obs;
     }
     getProducts();
   }
@@ -35,7 +42,7 @@ class ProductController extends GetxController {
 
   manageFavourites(int productId) async {
     var getIndex =
-        favouriteList.indexWhere((element) => element.id == productId);
+    favouriteList.indexWhere((element) => element.id == productId);
     if (getIndex >= 0) {
       favouriteList.removeAt(getIndex);
       await storage.remove("isFavList");
@@ -49,4 +56,29 @@ class ProductController extends GetxController {
   bool isFavourites(int productId) {
     return favouriteList.any((element) => element.id == productId);
   }
+
+
+  void addSearchToList(String searchName) {
+    searchName = searchName.toLowerCase();
+
+    searchList.value = productList.where((search) {
+      var searchTitle = search.title.toLowerCase();
+      var searchPrice = search.price.toString().toLowerCase();
+
+      return searchTitle.contains(searchName) ||
+          searchPrice.toString().contains(searchName);
+      update();
+    }).toList();
+
+
+  }
+
+  void clearSearch() {
+    searchController.clear();
+    addSearchToList("");
+  }
+
+
+
 }
+

@@ -32,44 +32,41 @@ class CartScreen extends StatelessWidget {
             )
           ],
         ),
-        body: Obx((){
-
-          if(cartController.productsMap.isEmpty)
-            {
-              return EmptyScreen();
-            }
-          else
-            {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 600,
-                      child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return CartProductScreen(
-                            productModels: cartController.productsMap.keys.toList()[index],
-                            quantity: cartController.productsMap.values.toList()[index],
-                            index: index,
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 20,
-                          );
-                        },
-                        itemCount: cartController.productsMap.length,
-                      ),
+        body: Obx(() {
+          if (cartController.productsMap.isEmpty) {
+            return EmptyScreen();
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 600,
+                    child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return CartProductScreen(
+                          productModels:
+                              cartController.productsMap.keys.toList()[index],
+                          quantity:
+                              cartController.productsMap.values.toList()[index],
+                          index: index,
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 20,
+                        );
+                      },
+                      itemCount: cartController.productsMap.length,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 30),
-                      child: CartTotalWidget(),
-                    )
-                  ],
-                ),
-              );
-            }
-
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: CartTotalWidget(),
+                  )
+                ],
+              ),
+            );
+          }
         }),
       ),
     );
