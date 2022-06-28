@@ -4,6 +4,7 @@ import 'package:meat_and_eat/logic/controllers/auth_controllers.dart';
 import 'package:meat_and_eat/logic/controllers/theme_controller.dart';
 import 'package:meat_and_eat/utils/theme.dart';
 import 'package:meat_and_eat/view/widgets/settings/dark_mode_widget.dart';
+import 'package:meat_and_eat/view/widgets/settings/profile_widget.dart';
 import 'package:meat_and_eat/view/widgets/text_utils.dart';
 
 import '../widgets/settings/logout_widget.dart';
@@ -76,8 +77,8 @@ class SettingsScreen extends StatelessWidget {
       ),*/
       body: ListView(
         padding: const EdgeInsets.all(24),
-        children: [
-          // ProfileImage();
+        children:  [
+           ProfileWidget(),
           const SizedBox(
             height: 10,
           ),
