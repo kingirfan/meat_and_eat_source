@@ -7,6 +7,7 @@ import 'package:meat_and_eat/view/widgets/settings/dark_mode_widget.dart';
 import 'package:meat_and_eat/view/widgets/settings/profile_widget.dart';
 import 'package:meat_and_eat/view/widgets/text_utils.dart';
 
+import '../widgets/settings/language_widget.dart';
 import '../widgets/settings/logout_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -90,7 +91,7 @@ class SettingsScreen extends StatelessWidget {
             height: 20,
           ),
           TextUtils(
-            text: 'GENERAL',
+            text: 'GENERAL'.tr,
             fontSize: 18,
             fontWeight: FontWeight.bold,
             colors: Get.isDarkMode ? pinkClr : mainColor,
@@ -103,7 +104,7 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          // LanguageWidget(),
+          LanguageWidget(),
           const SizedBox(
             height: 20,
           ),

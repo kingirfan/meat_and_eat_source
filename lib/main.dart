@@ -3,10 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:meat_and_eat/language/localiztion.dart';
 import 'package:meat_and_eat/logic/controllers/theme_controller.dart';
 import 'package:meat_and_eat/routes/routes.dart';
 import 'package:meat_and_eat/utils/theme.dart';
 import 'package:meat_and_eat/view/screens/welcome_screen.dart';
+
+import 'utils/strings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +31,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeController().themeDataGet,
       theme: ThemesApp.light,
       darkTheme: ThemesApp.dark,
+      locale: Locale(GetStorage().read<String>('lang').toString()),
+      translations: LocaliztionApp(),
+      fallbackLocale: Locale(ene),
       initialRoute: FirebaseAuth.instance.currentUser != null ||
               GetStorage().read<bool>('auth') == true
           ? AppRoutes.mainScreen
